@@ -21,7 +21,7 @@ function App() {
   const item = {color: "gray", onClick: togglePopUp};
 
   const addToPlayList = (movie) => {
-    const movieExisted = playList.some(mov => mov.imdbID == movie.imdbID);
+    const movieExisted = playList.some(mov => mov.imdbID === movie.imdbID);
     if(!movieExisted) {
       const newPlayList = [...playList, movie];
       setPlayList(newPlayList);
@@ -30,7 +30,7 @@ function App() {
   }
 
   const removeFromPlayList = (movie) => {
-    const newPlayList = playList.filter(mov => mov.imdbID != movie.imdbID);
+    const newPlayList = playList.filter(mov => mov.imdbID !== movie.imdbID);
     setPlayList(newPlayList);
   }
  
