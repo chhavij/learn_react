@@ -2,15 +2,20 @@ import React from 'react'
 
 function ConfirmationDialog(props) {
     return (
-        <div className="modal" style={{display: "block"}}>
+        <div className="modal confirm-modal">
             <div className="modal-dialog">
-                <div className="modal-content" style={{background:props.item.color}}>
+                <div className="modal-content">
+                <div class="modal-header">
+                    <h5 className="modal-title">Confirmation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={props.item.onClick}>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     <div className="modal-body">
-                        <p>Movie {props.item.name} has been added to your playlist.</p>
+                        <p>Movie has been added to playlist</p>
                     </div>
                     <div className="modal-footer">
                         <p>"My favorite color is {props.item.color}"</p>
-                        <button onClick={props.item.onClick}>Close</button>
                     </div>
                 </div>
             </div>

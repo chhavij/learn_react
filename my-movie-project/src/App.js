@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import PlayList from './components/PlayList'
 import ConfirmationDialog from './components/ConfirmationDialog'
+import Header from './components/header'
+import Message from './components/message'
+import './App.css';
 
 function App() {
 
@@ -9,72 +12,88 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isPopUpOpen, setPopUpOpen] = useState(false);
   const [playList, setPlayList] = useState([]);
+  const [view, setView] = useState("home");
+  const color = "#000000d9";
 
-  const togglePopUp = (movie) => {
+  const togglePopUp = () => {
     setPopUpOpen(!isPopUpOpen);   
   }
 
-  const item = {name: "test", color: "green", onClick: togglePopUp};
+  const item = {color: "gray", onClick: togglePopUp};
 
   const addToPlayList = (movie) => {
-    console.log(movie);
     const newPlayList = [...playList, movie];
-    console.log(newPlayList);
     setPlayList(newPlayList);
-    item.name = movie.Title;
     togglePopUp();
-    console.log(playList);
   }
-
-  
-  
-  useEffect(() => {
-    fetch("http://www.omdbapi.com/?apikey=e118a2c6&s="+searchTerm)
-      .then(res => res.json())
-      .then ( (result) => {
-        console.log(result);
-        setMovies([]);
-        setError(null)
-       if (result.Response == "True") {
-         if (result.Search)
-            setMovies(result.Search);
-       } else {
-          if (searchTerm != "")
-            setError(result.Error) 
-       }
-      }
-      )
-  }, [searchTerm]);
+ 
+  const changeView = (newview) => {
+    setView(newview);
+  }
 
   const handleOnChnage = (event) => {
     setSearchTerm(event.target.value);
   };
 
+  useEffect(() => {
+    fetch("http://www.omdbapi.com/?apikey=e118a2c6&s="+searchTerm)
+      .then(res => res.json())
+      .then ( (result) => {
+          console.log(result);
+          setMovies([]);
+          setError(null)
+          if (result.Response === "True") {
+              if (result.Search)
+                  setMovies(result.Search);
+          } else {
+              if (searchTerm !== "")
+                  setError(result.Error) 
+          }
+        })
+  }, [searchTerm]);
+
   return (
-    <div>
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col">
-          <h3>Movies</h3>
+    <div className="main-div" style={{backgroundColor: isPopUpOpen? "gray" : color}}>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-sm-3">
+            <Header level="1" heading="MoviesOnline"/>
+          </div>
+
+          <div className="col-sm-6 nav-menu" >
+            <button className="btn btn-link" onClick={()=>changeView("home")}><Header level="5" heading="Home"/></button>
+            <button className="btn btn-link" onClick={()=>changeView("list")}><Header level="5" heading="Playlist"/></button>
+          </div>
+
+          { view === "home" &&
+            <div className="col-sm-3">
+              <form><input className="search-box mt-3" type="text" value={searchTerm} placeholder="Type to search for movies ...."  onChange={handleOnChnage}/></form>
+            </div>
+          } 
         </div>
-        <div className="col col-sm-4">
-          <form>
-          <input type="text" value={searchTerm} placeholder="Enter movie name...."  onChange={handleOnChnage}/>
-        </form>
-        </div>
+
+        { view === "home" &&
+          <>
+            {!movies.length && !error && <Message message="No movies to display. Type in search box to search for movies..."/>}
+            { error && <Message message={error} />}
+            <div className="row">
+              { !error && (view === "home") && <PlayList movies={movies} onClick={addToPlayList} isPlayList="false"/> }
+            </div>
+          </>
+        } 
+
+        { view === "list" &&
+          <>
+            <div className="row">
+              <div className="col m-3"><Header level="5" heading="My List"/></div>
+            </div> 
+            <div className="row">
+              <PlayList movies={playList} onClick={addToPlayList}/>
+            </div>
+          </>
+        }
       </div>
-      <div className="row">
-       {error? <div className="col"> {error} </div> : ""}
-      </div>
-      <div className="row" style={{flexWrap: "nowrap", "overflowX": "auto"}}>
-        { error ? "" : <PlayList movies={movies} onClick={addToPlayList} isPlayList="false"/> }
-      </div>
-      <div className="row"><div className="col"><h3>PlayList</h3></div></div>
-      <div className="row" style={{flexWrap: "nowrap", "overflowX": "auto"}}>
-        <PlayList movies={playList} onClick={addToPlayList}/>
-      </div>
-    </div>
-    {isPopUpOpen && <ConfirmationDialog item={item} />}
+      {isPopUpOpen && <ConfirmationDialog item={item} />}
     </div>
   );  
  

@@ -1,0 +1,69 @@
+.heading-color {
+  color:  #f0f8ff;
+}
+
+input[type="text"] {
+  background-color : #f0f8ff; 
+}
+
+.search-box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+}
+
+.center {
+  justify-content: center;
+}
+
+.display-flex {
+  display:flex;
+  justify-content: center;
+  align-content: center;
+}
+
+
+.content-display {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid;
+  margin-top: 1rem;
+  height: 5rem;
+  background-color: #f0f8ff;;
+}
+
+.nav-menu {
+  display: flex;
+  justify-content: left;
+}
+
+.nav-menu button {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+  margin-top: 1rem;
+  text-decoration:  none !important;
+}
+
+.movie-card-img-height {
+  height: 24rem;
+}
+
+.movie-card-width {
+  width: 18rem;
+}
+
+.confirm-modal {
+  display: block;
+  top: 10rem;
+}
+
+.main-div {
+  position: absolute;
+  top: 0;  
+  right: 0; 
+  bottom: 0; 
+  left: 0;
+}
