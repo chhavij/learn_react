@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import PlayList from './components/PlayList'
 import ConfirmationDialog from './components/ConfirmationDialog'
-import Header from './components/header'
-import Message from './components/message'
+import Heading from './components/Heading'
+import Message from './components/MessageComp'
 import './App.css';
 
 function App() {
@@ -64,12 +64,12 @@ function App() {
       <div className="container-fluid">
         <div className="row">
           <div className="col-sm-3">
-            <Header level="1" heading="MoviesOnline"/>
+            <Heading level="1" heading="MoviesOnline"/>
           </div>
 
           <div className="col-sm-6 nav-menu" >
-            <button className="btn btn-link" onClick={()=>changeView("home")}><Header level="5" heading="Home"/></button>
-            <button className="btn btn-link" onClick={()=>changeView("list")}><Header level="5" heading="Playlist"/></button>
+            <button className="btn btn-link" onClick={()=>changeView("home")}><Heading level="5" heading="Home"/></button>
+            <button className="btn btn-link" onClick={()=>changeView("list")}><Heading level="5" heading="Playlist"/></button>
           </div>
 
           { view === "home" &&
@@ -92,7 +92,7 @@ function App() {
         { view === "list" &&
           <>
             <div className="row">
-              <div className="col m-3"><Header level="5" heading="My List"/></div>
+              <div className="col m-3"><Heading level="5" heading="My List"/></div>
             </div> 
             <div className="row">
               <PlayList movies={playList} onClick={removeFromPlayList} isPlayList="true"/>
