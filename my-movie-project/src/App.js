@@ -18,13 +18,20 @@ function App() {
   const togglePopUp = () => {
     setPopUpOpen(!isPopUpOpen);   
   }
-
   const item = {color: "gray", onClick: togglePopUp};
 
   const addToPlayList = (movie) => {
-    const newPlayList = [...playList, movie];
-    setPlayList(newPlayList);
+    const movieExisted = playList.some(mov => mov.imdbID == movie.imdbID);
+    if(!movieExisted) {
+      const newPlayList = [...playList, movie];
+      setPlayList(newPlayList);
+    }
     togglePopUp();
+  }
+
+  const removeFromPlayList = (movie) => {
+    const newPlayList = playList.filter(mov => mov.imdbID != movie.imdbID);
+    setPlayList(newPlayList);
   }
  
   const changeView = (newview) => {
@@ -88,7 +95,7 @@ function App() {
               <div className="col m-3"><Header level="5" heading="My List"/></div>
             </div> 
             <div className="row">
-              <PlayList movies={playList} onClick={addToPlayList}/>
+              <PlayList movies={playList} onClick={removeFromPlayList} isPlayList="true"/>
             </div>
           </>
         }

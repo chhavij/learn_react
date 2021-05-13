@@ -2,12 +2,13 @@ import React from 'react'
 
 function ConfirmationDialog(props) {
     return (
+        
         <div className="modal confirm-modal">
             <div className="modal-dialog">
-                <div className="modal-content">
-                <div class="modal-header">
+                <div className="modal-content confirm-model-content">
+                <div className="modal-header">
                     <h5 className="modal-title">Confirmation</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={props.item.onClick}>
+                        <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={props.item.onClick}>
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
