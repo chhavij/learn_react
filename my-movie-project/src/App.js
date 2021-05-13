@@ -43,7 +43,7 @@ function App() {
   };
 
   useEffect(() => {
-    fetch("http://www.omdbapi.com/?apikey=e118a2c6&s="+searchTerm)
+    fetch("https://www.omdbapi.com/?apikey=e118a2c6&s="+searchTerm)
       .then(res => res.json())
       .then ( (result) => {
           console.log(result);
