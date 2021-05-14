@@ -74,3 +74,13 @@ input[type="text"] {
   width:100%;
   overflow: scroll;
 }
+
+@media all and (max-width: 600px) {
+.row-aligment {
+    justify-content: center;
+    align-items: center;
+  }
+  .movie-card-width {
+    width: 25rem;
+  }
+}

@@ -13,6 +13,7 @@ function App() {
   const [isPopUpOpen, setPopUpOpen] = useState(false);
   const [playList, setPlayList] = useState([]);
   const [view, setView] = useState("home");
+  
   const color = "#000000d9";
 
   const togglePopUp = () => {
@@ -83,7 +84,7 @@ function App() {
           <>
             {!movies.length && !error && <Message message="No movies to display. Type in search box to search for movies..."/>}
             { error && <Message message={error} />}
-            <div className="row">
+            <div className="row row-aligment">
               { !error && (view === "home") && <PlayList movies={movies} onClick={addToPlayList} isPlayList="false"/> }
             </div>
           </>
