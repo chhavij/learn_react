@@ -44,7 +44,7 @@ function App() {
   };
 
   useEffect(() => {
-    fetch("https://www.omdbapi.com/?apikey=e118a2c6&s="+searchTerm)
+    fetch("https://www.omdbapi.com/?apikey=e118a2c6&type=movie&s="+searchTerm)
       .then(res => res.json())
       .then ( (result) => {
           console.log(result);
@@ -65,7 +65,7 @@ function App() {
       <div className="container-fluid">
         <div className="row">
           <div className="col-sm-3">
-            <Heading level="1" heading="MoviesOnline"/>
+            <Heading level="1" heading="Movies"/>
           </div>
 
           <div className="col-sm-6 nav-menu" >
@@ -92,9 +92,7 @@ function App() {
 
         { view === "list" &&
           <>
-            <div className="row">
-              <div className="col m-3"><Heading level="5" heading="My List"/></div>
-            </div> 
+            {!playList.length && <Message message="Your playlist is empty"/>}
             <div className="row">
               <PlayList movies={playList} onClick={removeFromPlayList} isPlayList="true"/>
             </div>
